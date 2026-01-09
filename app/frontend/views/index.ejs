@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">S</div>
+        <h1>Seyyul</h1>
+        <p class="tagline">Your Personal Education Platform</p>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <%= mode %>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
+            <button class="btn btn-secondary" id="loginBtn">Log In</button>
+        </div>
+
+        <p class="footer-text">Running on embedded Browser Engine</p>
+    </div>
+
+    <script>
+        document.getElementById('getStartedBtn').addEventListener('click', function () {
+            console.log('Get Started clicked');
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            console.log('Login clicked');
+        });
+    </script>
+</body>
+
+</html>
