@@ -1,0 +1,10 @@
+/* Verify Page Specific Styles */
+.verify-container {
+    text-align: center;
+    padding-top: 3rem;
+}
+
+#statusTitle {
+    margin-bottom: 1rem;
+    color: #1a1a2e;
+}

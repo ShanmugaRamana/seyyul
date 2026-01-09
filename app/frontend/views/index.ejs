@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body class="landing-page">
+    <header class="header">
+        <div class="brand">Seyyul</div>
+    </header>
+
+    <main class="hero">
+        <h1 class="hero-quote">Mastering the Art of Learning, one module at a time.</h1>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
+            <button class="btn btn-secondary" id="loginBtn">Log In</button>
+        </div>
+    </main>
+
+    <script>
+        // Check for user session
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            window.location.href = '/home';
+        } else {
+            // Default handlers for non-logged in state
+            document.getElementById('getStartedBtn').addEventListener('click', function () {
+                window.location.href = '/signup';
+            });
+
+            document.getElementById('loginBtn').addEventListener('click', function () {
+                window.location.href = '/login';
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
