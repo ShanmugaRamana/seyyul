@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - Seyyul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/verify.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="statusTitle">Verifying...</h1>
+        <p class="tagline" id="statusMessage">Please wait while we verify your email address.</p>
+
+        <div class="btn-group">
+            <button id="loginBtn" class="btn btn-primary" style="display: none;">Log In</button>
+            <button id="homeBtn" class="btn btn-secondary" style="display: none;">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+
+        document.getElementById('homeBtn').addEventListener('click', () => {
+            window.location.href = '/';
+        });
+
+        async function verifyEmail() {
+            if (!token) {
+                document.getElementById('statusTitle').textContent = 'Invalid Link';
+                document.getElementById('statusMessage').textContent = 'No verification token provided.';
+                document.getElementById('homeBtn').style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/verify/${token}`, {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('statusTitle').textContent = 'Email Verified!';
+                    document.getElementById('statusMessage').textContent = 'Your account has been successfully verified. You can now log in.';
+                    document.getElementById('loginBtn').style.display = 'block';
+                } else {
+                    document.getElementById('statusTitle').textContent = 'Verification Failed';
+                    document.getElementById('statusMessage').textContent = data.detail || 'Invalid or expired token.';
+                    document.getElementById('homeBtn').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                document.getElementById('statusTitle').textContent = 'Error';
+                document.getElementById('statusMessage').textContent = 'Failed to connect to server. Please try again.';
+                document.getElementById('homeBtn').style.display = 'block';
+            }
+        }
+
+        window.onload = verifyEmail;
+    </script>
+</body>
+
+</html>

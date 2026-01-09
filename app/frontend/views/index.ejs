@@ -7,37 +7,47 @@
     <title>
         <%= title %>
     </title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
-<body>
-    <div class="container">
-        <div class="logo">S</div>
-        <h1>Seyyul</h1>
-        <p class="tagline">Your Personal Education Platform</p>
+<body class="landing-page">
+    <header class="header">
+        <div class="brand">Seyyul</div>
+    </header>
 
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            <%= mode %>
-        </div>
+    <main class="hero">
+        <h1 class="hero-quote">Mastering the Art of Learning, one module at a time.</h1>
 
         <div class="btn-group">
             <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
             <button class="btn btn-secondary" id="loginBtn">Log In</button>
         </div>
-
-        <p class="footer-text">Running on embedded Browser Engine</p>
-    </div>
+    </main>
 
     <script>
-        document.getElementById('getStartedBtn').addEventListener('click', function () {
-            console.log('Get Started clicked');
-        });
+        // Check for user session
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            window.location.href = '/home';
+        } else {
+            // Default handlers for non-logged in state
+            document.getElementById('getStartedBtn').addEventListener('click', function () {
+                window.location.href = '/signup';
+            });
 
-        document.getElementById('loginBtn').addEventListener('click', function () {
-            console.log('Login clicked');
-        });
+            document.getElementById('loginBtn').addEventListener('click', function () {
+                window.location.href = '/login';
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
     </script>
 </body>
 

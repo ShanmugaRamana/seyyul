@@ -26,6 +26,8 @@ class SeyyulShell(QMainWindow):
 
 def start_shell():
     app = QApplication(sys.argv)
+    app.setOrganizationName("SeyyulOrganization")
+    app.setApplicationName("SeyyulApp")
     window = SeyyulShell()
     window.show()
     sys.exit(app.exec())
